@@ -1,6 +1,9 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
-class AppController extends ChangeNotifier {
+class AppController extends ChangeNotifier{
+
+  static AppController instance = AppController();
+  
   bool isDartTheme = false;
   changeTheme() {
     isDartTheme = !isDartTheme;
