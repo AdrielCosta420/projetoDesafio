@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_application_desafio/pages/home_page.dart';
 
-import 'app_controller.dart';
+import '../pages/app_controller.dart';
 
 class AppWidget extends StatelessWidget {
   const AppWidget({Key? key}) : super(key: key);

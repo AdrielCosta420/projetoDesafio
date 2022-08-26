@@ -5,7 +5,7 @@ class AppController extends ChangeNotifier{
   static AppController instance = AppController();
   
   bool isDartTheme = false;
-  changeTheme() {
+  void changeTheme() {
     isDartTheme = !isDartTheme;
     notifyListeners();
   }

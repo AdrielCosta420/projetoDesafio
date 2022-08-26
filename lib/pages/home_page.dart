@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_desafio/pages/app_controller.dart';
+import 'package:flutter_application_desafio/pages/cadastrarUser_page.dart';
+
+import '../widgets/custom_switch.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -15,81 +17,37 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Home', 
-        style: TextStyle(color: Color.fromARGB(255, 255, 255, 255), fontSize: 25)
-        ),
+        title: const Text('Home',
+            style: TextStyle(
+                color: Color.fromARGB(255, 255, 255, 255), fontSize: 25)),
         centerTitle: true,
-        backgroundColor: Color.fromARGB(255, 167, 10, 167),
-        actions: [
-          Icon(Icons.home, size: 25),
-          Tooltip(message: 'home page',),
-          
-        ],
+        leading: InkWell(
+          onTap: () => {},
+          child: const Icon(
+            Icons.home,
+            color: Colors.white,
+          ),
+        ),
       ),
       body: Column(
-        children: [
+        children: const [
           Center(
-              child: CustomSwitch(),
-              ),
+            child: const CustomSwitch(),
+          ),
         ],
       ),
-        floatingActionButton: FloatingActionButton(
-          child: Icon(Icons.person_add),
-            backgroundColor: Color.fromARGB(255, 167, 10, 167),
-            onPressed: (){
-                setState(() {
-            cont++;
-            print(cont);
-          });
-        },
-        ),
-    );
-  }
-}
-
-class CustomSwitch extends StatelessWidget {
-  const CustomSwitch({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Switch(
-              value: AppController.instance.isDartTheme,
-              onChanged: (value) {
-                AppController.instance.changeTheme();
-              },
-            );
-  }
-}
-
-
-/*
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: Icon(Icons.home),
-            tooltip: 'Home Page',
-            iconSize: 25,
-          ),
-        ],
-        title: Text(
-          'Home',
-          style: TextStyle(
-            color: Color.fromARGB(255, 255, 255, 255),
-            fontSize: 30,
-          ),
-        ),
-        centerTitle: true,
-        backgroundColor: Color.fromARGB(255, 167, 10, 167),
-      ),*/
-
-
-/*floatingActionButton:  FloatingActionButton(
-        child: Icon(Icons.person_add),
-       // heroTag: Tooltip(message: 'add user') ,
-        backgroundColor: Color.fromARGB(255, 167, 10, 167),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Color.fromARGB(255, 42, 140, 206),
         onPressed: () {
           setState(() {
             cont++;
+            Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => CadastrarUserPage(),
+            ));
           });
-          print(cont);
-        },*/
+        },
+        child: const Icon(Icons.person_add),
+      ),
+    );
+  }
+}
