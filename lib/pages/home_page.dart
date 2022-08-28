@@ -2,7 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_desafio/classes/classUsers.dart';
 import 'package:flutter_application_desafio/dados/dados_users.dart';
 import 'package:flutter_application_desafio/pages/cadastrarUser_page.dart';
+import 'package:flutter_application_desafio/provider/users.dart';
 import 'package:flutter_application_desafio/widgets/user_tile.dart';
+import 'package:provider/provider.dart';
+
+import 'package:flutter_application_desafio/provider/users.dart';
+
+
 
 import '../widgets/custom_switch.dart';
 
@@ -18,20 +24,20 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final Users = {...DADOS_USERS};
-
+    final UsersProvider users = Provider.of(context);
+    
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Lista de Usuários'
+        title: const Text('Lista de Usuários 2'
           ),
           centerTitle: true,
           
         ),
-      body: ListView.builder(
+      body: ListView.builder( 
         //mostrar o tamanho da lista
-        itemCount: Users.length,
+        itemCount: users.count,
         // um método
-        itemBuilder: ((context, index) => UserTile(Users.values.elementAt(index))),
+        itemBuilder: ((context, index) => UserTile(users.byIndex(index))),
         ),
     floatingActionButton: FloatingActionButton( 
       child:

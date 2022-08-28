@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_desafio/provider/users.dart';
+import 'package:provider/provider.dart';
 
 import 'pages/home_page.dart';
 
@@ -12,9 +14,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: HomePage(),
-      debugShowCheckedModeBanner: false,
+    return ChangeNotifierProvider(
+      create: ((context) => UsersProvider()),
+      child: MaterialApp(
+        home: HomePage(),
+        debugShowCheckedModeBanner: false,
+      ),
     );
   }
 }
