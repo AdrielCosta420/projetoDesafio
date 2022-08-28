@@ -9,12 +9,6 @@ class CadastrarUserPage extends StatefulWidget {
 }
 
 class _CadastrarUserPageState extends State<CadastrarUserPage> {
-  Users usuarios1 = Users(
-      nome: 'Adriel',
-      dataNascimento: '29/10/2001',
-      apelido: 'Driel',
-      email: 'adrielsilva@aleatorio.com',
-      celular: 85280238);
 
   @override
   Widget build(BuildContext context) {

@@ -1,17 +1,22 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-class Users {
+import 'package:flutter/material.dart';
+
+class User {
+  final String? id;
   final String nome;
   final String dataNascimento;
   final String apelido;
   final String email;
-  final int? celular;
+  final String celular;
+  final String avatarUrl;
 
-  Users({
+  const User({
+    required this.id,
     required this.nome,
     required this.dataNascimento,
     required this.apelido,
     required this.email,
-    this.celular,
+    required this.celular,
+    required this.avatarUrl,
   });
 
 
