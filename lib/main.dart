@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_desafio/pages/user_form.dart';
 import 'package:flutter_application_desafio/provider/users.dart';
+import 'package:flutter_application_desafio/routes/app_routes.dart';
 import 'package:provider/provider.dart';
 
 import 'pages/home_page.dart';
@@ -17,8 +19,11 @@ class MyApp extends StatelessWidget {
     return ChangeNotifierProvider(
       create: ((context) => UsersProvider()),
       child: MaterialApp(
-        home: HomePage(),
         debugShowCheckedModeBanner: false,
+        routes: {
+          AppRoutes.HOME: (context) => HomePage(),
+          AppRoutes.USER_FORM:(context) => UserForm()
+        },
       ),
     );
   }

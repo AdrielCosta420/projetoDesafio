@@ -3,6 +3,8 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_application_desafio/classes/classUsers.dart';
 
+import '../routes/app_routes.dart';
+
 class UserTile extends StatelessWidget {
 
   final User user;
@@ -26,7 +28,12 @@ class UserTile extends StatelessWidget {
             IconButton(
               icon: Icon(Icons.edit),
               color: Color.fromARGB(255, 248, 169, 22),
-              onPressed: (){},
+              onPressed: (){
+                Navigator.of(context).pushNamed(
+                  AppRoutes.USER_FORM,
+                  arguments: user,
+            );
+              },
               ),
             IconButton(
               icon: Icon(Icons.delete),

@@ -1,16 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_desafio/classes/classUsers.dart';
-import 'package:flutter_application_desafio/dados/dados_users.dart';
-import 'package:flutter_application_desafio/pages/cadastrarUser_page.dart';
 import 'package:flutter_application_desafio/provider/users.dart';
 import 'package:flutter_application_desafio/widgets/user_tile.dart';
 import 'package:provider/provider.dart';
 
-import 'package:flutter_application_desafio/provider/users.dart';
-
-
-
-import '../widgets/custom_switch.dart';
+import '../routes/app_routes.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -28,7 +21,7 @@ class _HomePageState extends State<HomePage> {
     
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Lista de Usuários 2'
+        title: const Text('Lista de Usuários'
           ),
           centerTitle: true,
           
@@ -42,22 +35,12 @@ class _HomePageState extends State<HomePage> {
     floatingActionButton: FloatingActionButton( 
       child:
       const Icon(Icons.person_add),
-      onPressed: () {  },),
+      onPressed: () {
+        Navigator.of(context).pushNamed(
+          AppRoutes.USER_FORM
+        );
+      },
+      ),
     );
   }
 }
-        
-      
-    /* floatingActionButton: FloatingActionButton(
-        backgroundColor: Color.fromARGB(255, 1, 1, 2),
-        onPressed: () {
-          setState(() {
-            cont++;
-            Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => CadastrarUserPage(),
-            ));
-          });
-        },
-        child: const Icon(Icons.person_add),
-      ),*/
-    
