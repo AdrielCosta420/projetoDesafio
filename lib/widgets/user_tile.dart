@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_desafio/classes/user.dart';
 import 'package:flutter_application_desafio/provider/users.dart';
 import 'package:provider/provider.dart';
+import 'package:age_calculator/age_calculator.dart';
 
 import '../routes/app_routes.dart';
 
@@ -81,6 +82,7 @@ class UserTile extends StatelessWidget {
                 style: TextStyle(fontSize: 18),
               ),
               Text(user.dataNascimento ?? '', style: TextStyle(fontSize: 17)),
+              Text(mostrarIdade(user.dataNascimento)),
               Text(user.celular ?? '', style: TextStyle(fontSize: 16)),
               Text(user.apelido ?? '', style: TextStyle(fontSize: 15)),
             ],
@@ -88,6 +90,23 @@ class UserTile extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  DateTime calculaIdade(String? data) {
+    if (data != null) {
+      var listData = data.split("/");
+      final dia = listData[0];
+      final mes = listData[1];
+      final ano = listData[2];
+      return DateTime(int.parse(ano), int.parse(mes), int.parse(dia));
+    } else {
+      return DateTime.now();
+    }
+  }
+
+  String mostrarIdade(String? data) {
+    var age = AgeCalculator.age(calculaIdade(data));
+    return "Idade : ${age.years} anos";
   }
 }
 
