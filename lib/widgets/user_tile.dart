@@ -16,7 +16,82 @@ class UserTile extends StatelessWidget {
         ? const CircleAvatar(child: Icon(Icons.person))
         : CircleAvatar(backgroundImage: NetworkImage(user.avatarUrl!));
 
-    return ListTile(
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Card(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            children: [
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  IconButton(
+                    icon: Icon(Icons.edit),
+                    color: Color.fromARGB(255, 248, 169, 22),
+                    onPressed: () {
+                      Navigator.of(context).pushNamed(
+                        AppRoutes.USER_FORM,
+                        arguments: user,
+                      );
+                    },
+                  ),
+                  CircleAvatar(
+                    child: avatar,
+                  ),
+                  IconButton(
+                    icon: Icon(Icons.delete),
+                    color: Colors.red,
+                    onPressed: () {
+                      showDialog(
+                        context: context,
+                        builder: (context) => AlertDialog(
+                          title: Text('Excluir Usuário'),
+                          content: Text('Tem certeza?'),
+                          actions: [
+                            ElevatedButton(
+                              child: Text('Não'),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                            ),
+                            ElevatedButton(
+                              child: Text('Sim'),
+                              onPressed: () {
+                                Provider.of<UsersProvider>(context,
+                                        listen: false)
+                                    .remove(user);
+                                Navigator.of(context).pop();
+                              },
+                            )
+                          ],
+                        ),
+                      );
+                    },
+                  ),
+                ],
+              ),
+              Text(
+                user.nome,
+                style: TextStyle(fontSize: 20),
+              ),
+              Text(
+                user.email ?? '',
+                style: TextStyle(fontSize: 18),
+              ),
+              Text(user.dataNascimento ?? '', style: TextStyle(fontSize: 17)),
+              Text(user.celular ?? '', style: TextStyle(fontSize: 16)),
+              Text(user.apelido ?? '', style: TextStyle(fontSize: 15)),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+/*
         leading: avatar,
         title: Text(user.nome),
         subtitle: Text(user.email ?? ''),
@@ -65,6 +140,5 @@ class UserTile extends StatelessWidget {
               ),
             ],
           ),
-        ));
-  }
-}
+        )
+        );*/
