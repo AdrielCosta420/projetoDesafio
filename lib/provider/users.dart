@@ -3,7 +3,7 @@
 import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_application_desafio/classes/classUsers.dart';
+import 'package:flutter_application_desafio/classes/user.dart';
 import 'package:flutter_application_desafio/dados/dados_users.dart';
 
 //mixin
@@ -29,10 +29,9 @@ class UsersProvider with ChangeNotifier {
     }
 
     //alterar
-    if(user.id != null &&
-    user.id.trim().isNotEmpty &&
+    if(user.id != null  &&
     _items.containsKey(user.id)) {
-      _items.update(user.id, (_) => User(
+      _items.update(user.id!, (_) => User(
         id: user.id, 
         nome: user.nome, 
         dataNascimento: user.dataNascimento, 

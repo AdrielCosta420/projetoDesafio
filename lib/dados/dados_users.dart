@@ -1,6 +1,6 @@
-import 'package:flutter_application_desafio/classes/classUsers.dart';
+import 'package:flutter_application_desafio/classes/user.dart';
 
-const DADOS_USERS = {
+ final DADOS_USERS = {
   '1':  User(
     id: '1',
     nome: 'Adriel',

@@ -30,7 +30,7 @@ class _HomePageState extends State<HomePage> {
         //mostrar o tamanho da lista
         itemCount: users.count,
         // um método
-        itemBuilder: ((context, index) => UserTile(users.byIndex(index))),
+        itemBuilder: ((context, index) => UserTile(users.byIndex(index),)),
         ),
     floatingActionButton: FloatingActionButton( 
       child:
