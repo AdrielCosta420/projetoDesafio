@@ -9,9 +9,21 @@ class UserForm extends StatelessWidget {
   final _form = GlobalKey<FormState>();
   final Map<String, String> _formData = {};
 
+  void _loadFormData(User user) {
+    _formData['id'] = user.id;
+    _formData['nome'] = user.nome;
+    _formData['email'] = user.email;
+    _formData['dataNascimento'] = user.dataNascimento;
+    _formData['celular'] = user.celular;
+    _formData['apelido'] = user.apelido;
+    _formData['avatarUrl'] = user.avatarUrl;
+  }
+
   @override
   Widget build(BuildContext context) {
     final user = ModalRoute.of(context)?.settings.arguments as User;
+
+    _loadFormData(user);
 
     return Scaffold(
       appBar: AppBar(
@@ -50,6 +62,7 @@ class UserForm extends StatelessWidget {
           child: Column(
             children: [
               TextFormField(
+                initialValue: _formData['nome'],
                 decoration: InputDecoration(labelText: 'Nome'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
@@ -64,23 +77,28 @@ class UserForm extends StatelessWidget {
                 onSaved: (value) => _formData['nome'] = value ?? '',
               ),
               TextFormField(
+                initialValue: _formData['email'],
                 decoration: InputDecoration(labelText: 'Email'),
-                onSaved: (value) => _formData['email'] = value  ?? '',
+                onSaved: (value) => _formData['email'] = value ?? '',
               ),
               TextFormField(
+                initialValue: _formData['dataNascimento'],
                 decoration: InputDecoration(labelText: 'Data de Nascimento'),
                 onSaved: (value) => _formData['dataNascimento'] = value ?? '',
               ),
               TextFormField(
+                initialValue: _formData['celular'],
                 decoration: InputDecoration(labelText: 'Número de Telefone'),
                 onSaved: (value) => _formData['celular'] = value ?? '',
               ),
               TextFormField(
+                initialValue: _formData['apelido'],
                 decoration:
                     InputDecoration(labelText: 'Como gosta de ser chamado'),
                 onSaved: (value) => _formData['apelido'] = value ?? '',
               ),
               TextFormField(
+                initialValue: _formData['avatarUrl'],
                 decoration: InputDecoration(labelText: 'AvatarUrl'),
                 onSaved: (value) => _formData['avatarUrl'] = value ?? '',
               ),
