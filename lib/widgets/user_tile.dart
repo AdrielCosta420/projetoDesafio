@@ -81,8 +81,12 @@ class UserTile extends StatelessWidget {
                 user.email ?? '',
                 style: TextStyle(fontSize: 18),
               ),
-              Text(user.dataNascimento ?? '', style: TextStyle(fontSize: 17)),
-              Text(mostrarIdade(user.dataNascimento)),
+              Text(formateDate(user.dataNascimento),
+                  style: TextStyle(fontSize: 17)),
+              Text(
+                mostrarIdade(user.dataNascimento),
+                style: TextStyle(fontSize: 17),
+              ),
               Text(user.celular ?? '', style: TextStyle(fontSize: 16)),
               Text(user.apelido ?? '', style: TextStyle(fontSize: 15)),
             ],
@@ -92,13 +96,33 @@ class UserTile extends StatelessWidget {
     );
   }
 
+  String formateDate(String? data) {
+    if (data != null) {
+      if (data.isNotEmpty) {
+        var listData = data.split("-");
+        final dia = listData[2];
+        final mes = listData[1];
+        final ano = listData[0];
+        return "$dia/$mes/$ano";
+      } else {
+        return "";
+      }
+    } else {
+      return "";
+    }
+  }
+
   DateTime calculaIdade(String? data) {
     if (data != null) {
-      var listData = data.split("/");
-      final dia = listData[0];
-      final mes = listData[1];
-      final ano = listData[2];
-      return DateTime(int.parse(ano), int.parse(mes), int.parse(dia));
+      if (data.isNotEmpty) {
+        var listData = data.split("-");
+        final dia = listData[2];
+        final mes = listData[1];
+        final ano = listData[0];
+        return DateTime(int.parse(ano), int.parse(mes), int.parse(dia));
+      } else {
+        return DateTime.now();
+      }
     } else {
       return DateTime.now();
     }

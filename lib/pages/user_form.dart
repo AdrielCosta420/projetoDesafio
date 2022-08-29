@@ -25,6 +25,7 @@ class _UserFormState extends State<UserForm> {
 
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Color.fromARGB(255, 130, 37, 236),
         title: const Text('Formulário de Usuário'),
         actions: [
           IconButton(
@@ -86,21 +87,10 @@ class _UserFormState extends State<UserForm> {
                   firstDate: DateTime(2000),
                   lastDate: DateTime(2100),
                   icon: Icon(Icons.event),
+                  initialDate: user.dataNascimento,
                   dateLabelText: 'Data de Nascimento',
-                  selectableDayPredicate: (date) {
-                    // Disable weekend days to select from the calendar
-                    if (date.weekday == 6 || date.weekday == 7) {
-                      return false;
-                    }
-
-                    return true;
-                  },
-                  onChanged: (val) => print(val),
-                  validator: (val) {
-                    print(val);
-                    return null;
-                  },
-                  onSaved: (val) => print(val),
+                  onChanged: (val) => user.dataNascimento = val,
+                  onSaved: (val) => user.dataNascimento = val,
                 ),
                 TextFormField(
                   initialValue: user.celular ?? '',

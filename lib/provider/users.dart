@@ -4,11 +4,11 @@ import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_application_desafio/classes/user.dart';
-import 'package:flutter_application_desafio/dados/dados_users.dart';
+
 
 //mixin
 class UsersProvider with ChangeNotifier {
-  final Map<String, User> _items = {...DADOS_USERS};
+  final Map<String, User> _items = {};
 
   //metodos
   List<User> get all {
