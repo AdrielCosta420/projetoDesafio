@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_desafio/classes/user.dart';
+import 'package:flutter_application_desafio/models/user.dart';
 import 'package:flutter_application_desafio/provider/users.dart';
 import 'package:provider/provider.dart';
 import 'package:age_calculator/age_calculator.dart';

@@ -3,8 +3,8 @@
 import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_application_desafio/classes/user.dart';
-
+import 'package:flutter_application_desafio/database/objectbox_database.dart';
+import 'package:flutter_application_desafio/models/user.dart';
 
 //mixin
 class UsersProvider with ChangeNotifier {
@@ -22,47 +22,28 @@ class UsersProvider with ChangeNotifier {
   User byIndex(int i) {
     return _items.values.elementAt(i);
   }
-  
+
   void put(User user) {
-    if(user == null) {
+    if (user == null) {
       return;
     }
 
     //alterar
-    if(user.id != null  &&
-    _items.containsKey(user.id)) {
-      _items.update(user.id!, (_) => User(
-        id: user.id, 
-        nome: user.nome, 
-        dataNascimento: user.dataNascimento, 
-        apelido: user.apelido, 
-        email: user.email, 
-        celular: user.celular, 
-        avatarUrl: 
-        user.avatarUrl));
+    if (user.id != null && _items.containsKey(user.id)) {
+      _items.update("", (_) => user);
     } else {
       //adicionar
       final id = Random().nextDouble().toString();
 
-    _items.putIfAbsent(id, () => User(
-      id: id,
-      nome: user.nome,
-      email: user.email,
-      apelido: user.apelido,
-      dataNascimento: user.dataNascimento,
-      avatarUrl: user.avatarUrl,
-      celular: user.celular
-    ),
-    );
-      }
+      _items.putIfAbsent(id, () => user);
+    }
     notifyListeners();
   }
 
   void remove(User user) {
-    if(user != null && user.id != null) {
+    if (user != null && user.id != null) {
       _items.remove(user.id);
       notifyListeners();
-
     }
   }
 }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_desafio/classes/user.dart';
+import 'package:flutter_application_desafio/models/user.dart';
 import 'package:flutter_application_desafio/provider/users.dart';
 import 'package:provider/provider.dart';
 import 'package:date_time_picker/date_time_picker.dart';
@@ -36,17 +36,7 @@ class _UserFormState extends State<UserForm> {
               if (isValid) {
                 _form.currentState!.save();
 
-                Provider.of<UsersProvider>(context, listen: false).put(
-                  User(
-                    id: user.id ?? '',
-                    nome: user.nome,
-                    dataNascimento: user.dataNascimento ?? '',
-                    apelido: user.apelido ?? '',
-                    email: user.email ?? '',
-                    celular: user.celular ?? '',
-                    avatarUrl: user.avatarUrl ?? '',
-                  ),
-                );
+                Provider.of<UsersProvider>(context, listen: false).put(user);
                 Navigator.of(context).pop();
               }
             },
@@ -83,11 +73,11 @@ class _UserFormState extends State<UserForm> {
                 DateTimePicker(
                   type: DateTimePickerType.date,
                   dateMask: 'dd/MM/yyyy',
-                  initialValue: DateTime.now().toString(),
+                  initialValue: user.dataNascimento,
                   firstDate: DateTime(2000),
                   lastDate: DateTime(2100),
                   icon: Icon(Icons.event),
-                  initialDate: user.dataNascimento,
+                  initialDate:  DateTime.now(),
                   dateLabelText: 'Data de Nascimento',
                   onChanged: (val) => user.dataNascimento = val,
                   onSaved: (val) => user.dataNascimento = val,
@@ -115,5 +105,19 @@ class _UserFormState extends State<UserForm> {
         ),
       ),
     );
+  }
+
+  DateTime? converterData(String? data) {
+    if (data != null) {
+      if (data.isNotEmpty) {
+        var split = data.split("-");
+        int ano = int.parse(split[0]);
+        int mes = int.parse(split[1]);
+        int dia = int.parse(split[2]);
+
+        return DateTime(ano, mes, dia);
+      }
+    }
+    return null;
   }
 }
