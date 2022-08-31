@@ -1,4 +1,6 @@
-import 'package:flutter_application_desafio/models/user.dart';
+
+
+import 'package:flutter_application_desafio/app/models/user.dart';
 
 abstract class UserRepository {
   Future<void> save(User user);

@@ -1,30 +1,40 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_application_desafio/models/user.dart';
-import 'package:flutter_application_desafio/provider/users.dart';
-import 'package:provider/provider.dart';
 import 'package:date_time_picker/date_time_picker.dart';
+import 'package:flutter_application_desafio/app/models/user.dart';
+import 'package:flutter_application_desafio/app/modules/users/users_store.dart';
+import 'package:flutter_application_desafio/app/repositories/user_repository.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter/material.dart';
 
-class UserForm extends StatefulWidget {
-  const UserForm({Key? key}) : super(key: key);
-
+class UsersPage extends StatefulWidget {
+  final String title;
+  const UsersPage({Key? key, this.title = 'UsersPage'}) : super(key: key);
   @override
-  State<UserForm> createState() => _UserFormState();
+  UsersPageState createState() => UsersPageState();
 }
 
-class _UserFormState extends State<UserForm> {
+class UsersPageState extends State<UsersPage> {
   final _form = GlobalKey<FormState>();
+  final UsersStore store = Modular.get();
+  final UserRepository repository = Modular.get();
+  late User user;
 
-  @override
-  Widget build(BuildContext context) {
-    User user;
+    
+
+    @override
+  void initState() {
+    super.initState();
     try {
-      user = ModalRoute.of(context)?.settings.arguments as User;
+      user = Modular.args.data as User;
     } catch (e) {
       user = User(nome: '');
     }
+  }
 
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        // ignore: prefer_const_constructors
         backgroundColor: Color.fromARGB(255, 130, 37, 236),
         title: const Text('Formulário de Usuário'),
         actions: [
@@ -36,8 +46,8 @@ class _UserFormState extends State<UserForm> {
               if (isValid) {
                 _form.currentState!.save();
 
-                Provider.of<UsersProvider>(context, listen: false).put(user);
-                Navigator.of(context).pop();
+                repository.save(user);
+                Modular.to.pop();
               }
             },
           ),
@@ -76,22 +86,20 @@ class _UserFormState extends State<UserForm> {
                   initialValue: user.dataNascimento,
                   firstDate: DateTime(2000),
                   lastDate: DateTime(2100),
-                  icon: Icon(Icons.event),
-                  initialDate:  DateTime.now(),
+                  icon: const Icon(Icons.event),
+                  initialDate: DateTime.now(),
                   dateLabelText: 'Data de Nascimento',
                   onChanged: (val) => user.dataNascimento = val,
                   onSaved: (val) => user.dataNascimento = val,
                 ),
                 TextFormField(
                   initialValue: user.celular ?? '',
-                  decoration:
-                      const InputDecoration(labelText: 'Número de Telefone'),
+                  decoration: const InputDecoration(labelText: 'Número de Telefone'),
                   onSaved: (value) => user.celular = value ?? '',
                 ),
                 TextFormField(
                   initialValue: user.apelido ?? '',
-                  decoration: const InputDecoration(
-                      labelText: 'Como gosta de ser chamado'),
+                  decoration: const InputDecoration(labelText: 'Como gosta de ser chamado'),
                   onSaved: (value) => user.apelido = value ?? '',
                 ),
                 TextFormField(

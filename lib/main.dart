@@ -1,30 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_desafio/pages/user_form.dart';
-import 'package:flutter_application_desafio/provider/users.dart';
-import 'package:flutter_application_desafio/routes/app_routes.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_application_desafio/app/app_module.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
-import 'pages/home_page.dart';
+import 'app/app_widget.dart';
+
 
 void main(List<String> args) {
-  runApp(const MyApp());
+  runApp( ModularApp(child: AppWidget(), module: AppModule(),));
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: ((context) => UsersProvider()),
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        routes: {
-          AppRoutes.HOME: (context) => HomePage(),
-          AppRoutes.USER_FORM:(context) => UserForm()
-        },
-      ),
-    );
-  }
-}
